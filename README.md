@@ -10,7 +10,8 @@ Install mongodb on your computer
 
 Go to src folder
 
-```node app.js
+```
+node app.js
 ```
 
 ## Initialisation of the database

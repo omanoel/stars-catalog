@@ -35,6 +35,7 @@ app.get('/', (req, res) => {
 });
 
 require('./routes/hyg-catalog-star.routes')(app);
+require('./routes/kharchenko.routes')(app);
 
 const port = process.env.PORT || 8080;
 

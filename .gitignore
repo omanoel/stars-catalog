@@ -1,0 +1,20 @@
+# Node
+node_modules
+
+#MongoDB
+
+# Build directories
+dist
+
+# IDE/dev
+.vscode
+public/**/*.map
+
+# Temp folder
+tmp
+
+#npm debug log
+npm-debug.log
+
+#csv files
+**/*.csv

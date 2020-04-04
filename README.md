@@ -10,7 +10,7 @@ Install mongodb on your computer
 
 Go to src folder
 
-```
+```bash
 node app.js
 ```
 
@@ -18,4 +18,4 @@ node app.js
 
 Add the HYG catalog CSV file into datas folder.
 
-http://localhost:8080/api/hyg-catalog/init/1
+<http://localhost:8080/api/hyg-catalog/init/1>

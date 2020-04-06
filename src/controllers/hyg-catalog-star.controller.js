@@ -34,18 +34,66 @@ exports.create = (req, res) => {
 
 // Retrieve all HygCatalogStars from the database.
 exports.findAll = (req, res) => {
-  const dist = req.query.dist;
-  var condition = dist ? {
-    dist: {
-      $lt: dist
-    }
-  } : {
+  let condition = {
     dist: {
       $lt: 30
     }
   };
 
-  console.log('findAll ' + condition);
+  var fields = {
+    id: 1,
+    x: 1,
+    y: 1,
+    z: 1,
+    spect: 1
+  };
+
+  HygCatalogStar.find(condition, fields)
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: err.message || 'Some error occurred while retrieving HygCatalogStar.'
+      });
+    });
+};
+
+// Retrieve all HygCatalogStars from the database.
+exports.search = (req, res) => {
+  let condition = {
+    dist: {
+      $lt: 3
+    }
+  };
+  if (req.params.criterias) {
+    condition = {
+      $and: []
+    };
+    const criterias = JSON.parse(req.params.criterias);
+    Object.keys(criterias).forEach(key => {
+      if (criterias[key]) {
+        const aMinMax = criterias[key].split(':');
+        if (aMinMax.length > 0) {
+          if (aMinMax[0] !== null && aMinMax[0] !== undefined) {
+            const param = {};
+            param[key] = {
+              $gte: aMinMax[0]
+            }
+            condition.$and.push(param)
+          }
+          if (aMinMax[1] !== null && aMinMax[1] !== undefined) {
+            const param = {};
+            param[key] = {
+              $lte: aMinMax[1]
+            }
+            condition.$and.push(param)
+          }
+        }
+      }
+    });
+  }
+  console.log(condition)
   var fields = {
     id: 1,
     x: 1,

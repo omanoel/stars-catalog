@@ -9,6 +9,9 @@ module.exports = app => {
   // Retrieve all HygCatalogStars
   router.get("/", hygCatalogStarCtrl.findAll);
 
+  // Search HygCatalogStars
+  router.get("/search/:criterias", hygCatalogStarCtrl.search);
+
   // Init the data
   router.get("/init/:start", hygCatalogStarCtrl.init);
 

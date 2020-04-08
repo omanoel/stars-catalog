@@ -200,7 +200,7 @@ const parserColums = [{
   max: 210
 }];
 
-const keepColumns = ['ascc', 'ra', 'dec', 'plx', 'pmra', 'pmdec', 'spect', 'tyc1', 'tyc2', 'tyc3', 'hip', 'hd', 'dm'];
+const keepColumns = ['ascc', 'ra', 'dec', 'plx', 'pmra', 'pmdec', 'spect', 'tyc1', 'tyc2', 'tyc3', 'hip', 'hd', 'dm', 'bmag', 'vmag'];
 
 // Init
 exports.getCsv = (req, res) => {
@@ -208,7 +208,7 @@ exports.getCsv = (req, res) => {
   const datFile = req.params.file;
   // Load dat file
   const starLines = fs
-    .readFileSync('./datas/' + datFile)
+    .readFileSync('./datas/kharchenko/' + datFile)
     .toString()
     .split('\n');
   // -----------------------
@@ -234,7 +234,7 @@ exports.getCsv = (req, res) => {
         if (key === 'plx' && value === '999999') {
           avoid = true;
         };
-        aStar += value + ',';
+        aStar += '"' + value + '";';
       });
       aStar += '\n';
     }
